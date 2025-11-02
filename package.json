@@ -1,0 +1,45 @@
+{
+  "name": "startup-document-analyzer",
+  "version": "1.0.0",
+  "description": "AI-powered platform for analyzing startup documents, emails, and call transcripts with advanced fact-checking capabilities",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "backend:dev": "cd backend && python main.py",
+    "frontend:dev": "cd frontend && npm start",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:install": "cd frontend && npm install",
+    "backend:install": "cd backend && pip install -r requirements.txt",
+    "install:all": "npm run frontend:install && npm run backend:install",
+    "start": "npm run dev",
+    "build": "npm run frontend:install && npm run frontend:build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "startup",
+    "document-analysis",
+    "ai",
+    "fact-checking",
+    "gemini",
+    "react",
+    "fastapi"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/startup-document-analyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/startup-document-analyzer/issues"
+  },
+  "homepage": "https://github.com/yourusername/startup-document-analyzer#readme",
+  "dependencies": {
+    "firebase": "^12.2.1"
+  }
+}

@@ -1,0 +1,153 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read/write their own user document and create new users
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null;
+    }
+    
+    // Startups collection - public read access, authenticated write access
+    match /startups/{startupId} {
+      allow read: if true; // Allow public reading of all startups for discovery
+      allow write: if request.auth != null && (
+        request.auth.uid == resource.data.userId || // Owner can write
+        request.auth.uid == request.resource.data.userId // Creator can write
+      );
+      allow create: if request.auth != null; // Allow creating startup documents
+      allow list: if true; // Allow public listing of startups
+    }
+    
+    // Investors collection - public read access, authenticated write access
+    match /investors/{investorId} {
+      allow read: if true; // Allow public reading of all investors for discovery
+      allow write: if request.auth != null && (
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+      allow list: if true; // Allow public listing of investors
+    }
+    
+    // Documents can be read/written by their owner or startup owner
+    match /documents/{documentId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.startupId || 
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.startupId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Analysis results can be read by anyone (public access for investors)
+    // but only written by their owner
+    match /analyses/{analysisId} {
+      allow read: if true; // Public read access for analysis data
+      allow write: if request.auth != null && (
+        request.auth.uid == resource.data.startupId || 
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.startupId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+      // Allow queries for anyone (public access)
+      allow list: if true;
+    }
+    
+    // Individual analysis results can be read by anyone (public access)
+    // but only written by their owner
+    match /individual_analyses/{analysisId} {
+      allow read: if true; // Public read access for individual analysis data
+      allow write: if request.auth != null && (
+        request.auth.uid == resource.data.startupId || 
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.startupId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+      // Allow queries for anyone (public access)
+      allow list: if true;
+    }
+    
+    // Financial metrics can be read/written by startup owner
+    match /financialMetrics/{metricId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.startupId ||
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.startupId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Team members can be read/written by startup owner
+    match /teamMembers/{memberId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.startupId ||
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.startupId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Market data can be read/written by startup owner
+    match /marketData/{dataId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.startupId ||
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.startupId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Competitors can be read/written by startup owner
+    match /competitors/{competitorId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.startupId ||
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.startupId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Meetings can be read/written by participants
+    match /meetings/{meetingId} {
+      allow read, write: if request.auth != null && (
+        request.auth.uid == resource.data.startupId || 
+        request.auth.uid == resource.data.investorId ||
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.startupId ||
+        request.auth.uid == request.resource.data.investorId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Public startup listings (for discovery) - anyone can read
+    match /public_startups/{startupId} {
+      allow read: if true; // Anyone can read public startup data
+      allow write: if request.auth != null && (
+        request.auth.uid == startupId ||
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+    }
+    
+    // Public investor listings (for discovery) - anyone can read
+    match /public_investors/{investorId} {
+      allow read: if true; // Anyone can read public investor data
+      allow write: if request.auth != null && (
+        request.auth.uid == investorId ||
+        request.auth.uid == resource.data.userId ||
+        request.auth.uid == request.resource.data.userId
+      );
+      allow create: if request.auth != null;
+    }
+  }
+}
