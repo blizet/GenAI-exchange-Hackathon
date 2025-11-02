@@ -1,7 +1,5 @@
 # 🚀 InvestAI - AI-Powered Startup Investment Platform
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 An AI-powered platform connecting startups and investors with comprehensive analysis, meeting scheduling, and intelligent matching.
 
 ## 🎥 Live Demo & Video
