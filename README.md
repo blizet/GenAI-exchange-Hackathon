@@ -6,7 +6,7 @@ An AI-powered platform connecting startups and investors with comprehensive anal
 
 *   **Live Frontend:** [https://investai-genai.web.app/](https://investai-genai.web.app/)
 *   **Live Backend:** [https://genai-hackathon-341748952555.asia-south1.run.app/](https://genai-hackathon-341748952555.asia-south1.run.app/)
-*   **Demo Video:** [Link to YouTube Demo](#)
+*   **Demo Video:** [Link to YouTube Demo](https://youtu.be/VMNkV2dWnEE)
 
 ## ✨ Key Features
 
