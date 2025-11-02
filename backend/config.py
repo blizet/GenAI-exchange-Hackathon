@@ -70,6 +70,8 @@ class Settings(BaseSettings):
         default=[
             "http://localhost:3000", 
             "http://127.0.0.1:3000",
+            "https://investai-genai.web.app/",
+            "http://investai-genai.web.app/",
             "https://ecommerceapp-205c5.web.app/",
             "http://ecommerceapp-205c5.web.app/",
             "https://genaiexchangehackathon-production.up.railway.app",
