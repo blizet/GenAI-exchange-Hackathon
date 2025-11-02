@@ -4,8 +4,8 @@ An AI-powered platform connecting startups and investors with comprehensive anal
 
 ## 🎥 Live Demo & Video
 
-*   **Live Frontend:** [https://ecommerceapp-205c5.web.app](https://ecommerceapp-205c5.web.app)
-*   **Live Backend:** [https://genai-hackathon-949531678444.asia-south1.run.app/health](https://genai-hackathon-949531678444.asia-south1.run.app/health)
+*   **Live Frontend:** [https://investai-genai.web.app/](https://investai-genai.web.app/)
+*   **Live Backend:** [https://genai-hackathon-341748952555.asia-south1.run.app/](https://genai-hackathon-341748952555.asia-south1.run.app/)
 *   **Demo Video:** [Link to YouTube Demo](#)
 
 ## ✨ Key Features
